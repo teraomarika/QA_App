@@ -61,6 +61,7 @@ class QuestionSendActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CHOOSER_REQUEST_CODE) {
             if (resultCode != Activity.RESULT_OK) {
                 if (mPictureUri != null) {
@@ -157,7 +158,7 @@ class QuestionSendActivity : AppCompatActivity(), View.OnClickListener,
 
             data["title"] = title
             data["body"] = body
-            data["name"] = name
+            data["name"] = name!!
 
             // 添付画像を取得する
             val drawable = imageView.drawable as? BitmapDrawable

@@ -18,9 +18,9 @@ import com.google.firebase.auth.FirebaseAuth
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() ,NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var mToolbar: Toolbar
-    private var mGenre=0
+    private var mGenre = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,15 +29,26 @@ class MainActivity : AppCompatActivity() ,NavigationView.OnNavigationItemSelecte
         setSupportActionBar(mToolbar)
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener { _ ->
-// ログイン済みのユーザーを取得する
+        fab.setOnClickListener { view -> // ジャンルを選択していない場合（mGenre == 0）はエラーを表示するだけ
+            if (mGenre == 0) {
+                Snackbar.make(view, "ジャンルを選択してください", Snackbar.LENGTH_LONG).show()
+            } else {
+            }
+            // ログイン済みのユーザーを取得する
+
             val user = FirebaseAuth.getInstance().currentUser
-// ログインしていなければログイン画面に遷移させる
+
             if (user == null) {
                 val intent = Intent(applicationContext, LoginActivity::class.java)
                 startActivity(intent)
+            } else {
+                val intent = Intent(applicationContext, QuestionSendActivity::class.java)
+                intent.putExtra("genre", mGenre)
+                startActivity(intent)
             }
         }
+
+
         // ナビゲーションドロワーの設定
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         val toggle =
@@ -47,13 +58,18 @@ class MainActivity : AppCompatActivity() ,NavigationView.OnNavigationItemSelecte
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
+    }
 
+    override fun onResume() {
+        super.onResume()
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
 
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        // 1:趣味を既定の選択とする
+        if (mGenre == 0) {
+            onNavigationItemSelected(navigationView.menu.getItem(0))
         }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -63,13 +79,13 @@ class MainActivity : AppCompatActivity() ,NavigationView.OnNavigationItemSelecte
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+        val id = item.itemId
+        if (id == R.id.action_settings) {
+            val intent = Intent(applicationContext, SettingActivity::class.java)
+            startActivity(intent)
+            return true
         }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -83,15 +99,15 @@ class MainActivity : AppCompatActivity() ,NavigationView.OnNavigationItemSelecte
         } else if (id == R.id.nav_health) {
             mToolbar.title = "健康"
             mGenre = 3
-        } else if (id == R.id.nav_compter){
+        } else if (id == R.id.nav_compter) {
             mToolbar.title = "コンピューター"
-        mGenre = 4
+            mGenre = 4
         }
 
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         drawer.closeDrawer(GravityCompat.START)
         return true
 
-}
+    }
 
 }

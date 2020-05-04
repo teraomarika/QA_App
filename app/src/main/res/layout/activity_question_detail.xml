@@ -18,13 +18,16 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:src="@drawable/plus" />
+
+
 
 </RelativeLayout>

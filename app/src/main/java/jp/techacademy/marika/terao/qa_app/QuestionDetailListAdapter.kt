@@ -14,6 +14,7 @@ class QuestionDetailListAdapter(context: Context,private val mQustion:Question):
     companion object {
         private val TYPE_QUESTION = 0
         private val TYPE_ANSWER = 1
+
 }
 
     private var mLayoutInflater:LayoutInflater?=null

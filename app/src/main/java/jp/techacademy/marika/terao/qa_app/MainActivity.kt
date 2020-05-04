@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.util.Base64
+import android.view.View
 import android.widget.ListView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -20,6 +21,7 @@ import com.google.firebase.database.*
 
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.list_question_detail.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var mToolbar: Toolbar
@@ -111,6 +113,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         mToolbar = findViewById(R.id.toolbar)
         setSupportActionBar(mToolbar)
+
+
+
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener { view -> // ジャンルを選択していない場合（mGenre == 0）はエラーを表示するだけ
@@ -204,6 +209,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else if (id == R.id.nav_compter) {
             mToolbar.title = "コンピューター"
             mGenre = 4
+        }else if(id==R.id.nav_favorite){
+            mToolbar.title="お気に入り"
+            mGenre=5
         }
 
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)

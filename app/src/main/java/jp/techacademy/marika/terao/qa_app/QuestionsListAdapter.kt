@@ -3,6 +3,7 @@ package jp.techacademy.marika.terao.qa_app
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,9 @@ class QuestionsListAdapter(context: Context):BaseAdapter() {
                 .copy(Bitmap.Config.ARGB_8888, true)
             val imageView = convertView.findViewById<View>(R.id.imageView) as ImageView
             imageView.setImageBitmap(image)
+
+            val favoriteButton=mQuestionArrayList
+            favoriteButton
         }
         return convertView
     }
@@ -60,6 +64,9 @@ class QuestionsListAdapter(context: Context):BaseAdapter() {
     override fun getCount(): Int {
         return mQuestionArrayList.size
     }
+
+
+
 
 
 }

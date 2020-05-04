@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_question_detail.*
+import kotlinx.android.synthetic.main.list_question_detail.*
 
 class QuestionDetailActivity : AppCompatActivity() {
 
@@ -66,6 +67,15 @@ class QuestionDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question_detail)
 
+
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user == null) {
+            favoriteButton.visibility = View.INVISIBLE
+        } else {
+            favoriteButton.visibility = View.VISIBLE
+        }
+
+
         // 渡ってきたQuestionのオブジェクトを保持する
         val extras = intent.extras
         if (extras != null) {
@@ -89,14 +99,16 @@ class QuestionDetailActivity : AppCompatActivity() {
                 startActivity(intent)
             } else {
                 // Questionを渡して回答作成画面を起動する
-                val intent=Intent(applicationContext,AnswerSendActivity::class.java)
-                intent.putExtra("question",mQuestion)
+                val intent = Intent(applicationContext, AnswerSendActivity::class.java)
+                intent.putExtra("question", mQuestion)
                 startActivity(intent)
             }
         }
 
+
         val dataBaseReference = FirebaseDatabase.getInstance().reference
-        mAnswerRef = dataBaseReference.child(ContentsPATH).child(mQuestion.genre.toString()).child(mQuestion.questionUid).child(AnswersPATH)
+        mAnswerRef = dataBaseReference.child(ContentsPATH).child(mQuestion.genre.toString())
+            .child(mQuestion.questionUid).child(AnswersPATH)
         mAnswerRef.addChildEventListener(mEventListener)
     }
 }

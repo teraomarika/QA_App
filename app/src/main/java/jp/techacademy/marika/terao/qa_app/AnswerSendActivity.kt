@@ -20,7 +20,7 @@ class AnswerSendActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_answer_send)
 
 
         // 渡ってきたQuestionのオブジェクトを保持する
@@ -87,3 +87,4 @@ class AnswerSendActivity : AppCompatActivity(), View.OnClickListener,
 
 
 }
+

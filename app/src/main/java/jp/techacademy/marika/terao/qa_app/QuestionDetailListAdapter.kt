@@ -56,6 +56,7 @@ class QuestionDetailListAdapter(context: Context,private val mQustion:Question):
             val body = mQustion.body
             val name = mQustion.name
 
+
             val bodyTextView = convertView.findViewById<View>(R.id.bodyTextView) as TextView
             bodyTextView.text = body
 

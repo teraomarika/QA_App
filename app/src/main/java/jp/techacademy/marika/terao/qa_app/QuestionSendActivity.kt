@@ -44,6 +44,7 @@ class QuestionSendActivity : AppCompatActivity(), View.OnClickListener,
     private var mPictureUri: Uri? = null
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question_send)

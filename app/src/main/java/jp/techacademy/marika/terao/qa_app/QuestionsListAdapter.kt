@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 
@@ -42,9 +43,9 @@ class QuestionsListAdapter(context: Context):BaseAdapter() {
                 .copy(Bitmap.Config.ARGB_8888, true)
             val imageView = convertView.findViewById<View>(R.id.imageView) as ImageView
             imageView.setImageBitmap(image)
+//
+//            val favoriteButton=convertView.findViewById<View>(R.id.favoriteButton)as Button
 
-            val favoriteButton=mQuestionArrayList
-            favoriteButton
         }
         return convertView
     }

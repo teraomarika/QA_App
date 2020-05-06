@@ -3,6 +3,7 @@ package jp.techacademy.marika.terao.qa_app
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ListView
 
@@ -17,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_question_detail.*
 import kotlinx.android.synthetic.main.list_question_detail.*
+import kotlinx.android.synthetic.main.list_questions.*
 
 class QuestionDetailActivity : AppCompatActivity() {
 
@@ -68,14 +70,6 @@ class QuestionDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_question_detail)
 
 
-        val user = FirebaseAuth.getInstance().currentUser
-        if (user == null) {
-            favoriteButton.visibility = View.INVISIBLE
-        } else {
-            favoriteButton.visibility = View.VISIBLE
-        }
-
-
         // 渡ってきたQuestionのオブジェクトを保持する
         val extras = intent.extras
         if (extras != null) {
@@ -104,6 +98,9 @@ class QuestionDetailActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
+
+
 
 
         val dataBaseReference = FirebaseDatabase.getInstance().reference

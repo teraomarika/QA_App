@@ -13,8 +13,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_answer_send.*
 
-class AnswerSendActivity : AppCompatActivity(), View.OnClickListener,
-    DatabaseReference.CompletionListener {
+class AnswerSendActivity : AppCompatActivity(), View.OnClickListener, DatabaseReference.CompletionListener {
 
     private lateinit var mQuestion: Question
 
@@ -25,9 +24,8 @@ class AnswerSendActivity : AppCompatActivity(), View.OnClickListener,
 
         // 渡ってきたQuestionのオブジェクトを保持する
         val extras = intent.extras
-        if (extras != null) {
-            mQuestion = extras.get("question") as Question
-        }
+        mQuestion = extras!!.get("question") as Question
+
 
 //        UI準備
         sendButton.setOnClickListener(this)

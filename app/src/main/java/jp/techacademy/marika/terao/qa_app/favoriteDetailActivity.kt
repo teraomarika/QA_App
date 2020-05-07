@@ -1,5 +1,6 @@
 package jp.techacademy.marika.terao.qa_app
 
+import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -12,19 +13,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.google.firebase.database.R
-
-
-import android.content.Intent
-
-
 import kotlinx.android.synthetic.main.activity_question_detail.*
 
 
 class favoriteDetailActivity : AppCompatActivity() {
 
-
-    class FavoriteDetailActivity : AppCompatActivity() {
 
         private lateinit var mQuestion: Question
         private lateinit var mFavorite: favorite
@@ -98,8 +91,8 @@ class favoriteDetailActivity : AppCompatActivity() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_question_detail)
-            Log.d("aaa", "qqq")
+           setContentView(R.layout.activity_question_detail)
+
 
             //val dataBaseReference = FirebaseDatabase.getInstance().reference
 
@@ -240,6 +233,3 @@ class favoriteDetailActivity : AppCompatActivity() {
             return cursor.getString(column_index)
         }
     }
-
-
-}

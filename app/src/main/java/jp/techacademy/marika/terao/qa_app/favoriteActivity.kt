@@ -27,8 +27,6 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
     private lateinit var mAdapter: QuestionsListAdapter
     private lateinit var mQuestion: Question
     private lateinit var mAnswerRef: DatabaseReference
-
-
     private var mGenreRef: DatabaseReference? = null
     private val mEventListener = object : ChildEventListener {
         override fun onChildAdded(dataSnapshot: DataSnapshot, s: String?) {
@@ -229,7 +227,7 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         }
         mGenreRef = mDatabaseReference.child(ContentsPATH).child(mGenre.toString())
         mGenreRef!!.addChildEventListener(mEventListener)
-        // --- ここまで追加する ---
+
 
         return true
     }

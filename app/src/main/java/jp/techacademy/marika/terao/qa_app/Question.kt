@@ -4,8 +4,7 @@ import java.io.Serializable
 import java.util.ArrayList
 
 class Question(
-    val title: String,
-    val body: String,
+    val title: String, val body: String,
     val name: String,
     val uid: String,
     val questionUid: String,

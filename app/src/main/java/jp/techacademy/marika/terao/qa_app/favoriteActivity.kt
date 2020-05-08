@@ -132,6 +132,8 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
 
             }
         })
+
+        mDatabaseReference = FirebaseDatabase.getInstance().reference
         // ListViewの準備
         mListView = findViewById(R.id.listView2)
         mAdapter = QuestionsListAdapter(this)
@@ -157,7 +159,7 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         // 1:趣味を既定の選択とする
         onNavigationItemSelected(navigationView.menu.getItem(2))
         mQuestionArrayList.clear()
-        mAdapter.settQuestionArrayList(mQuestionArrayList)
+        mAdapter.setQuestionArrayList(mQuestionArrayList)
         mListView.adapter = mAdapter
     }
 
@@ -211,7 +213,7 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         // --- ここから ---
         // 質問のリストをクリアしてから再度Adapterにセットし、AdapterをListViewにセットし直す
         mQuestionArrayList.clear()
-        mAdapter.settQuestionArrayList(mQuestionArrayList)
+        mAdapter.setQuestionArrayList(mQuestionArrayList)
         mListView.adapter = mAdapter
 
         // 選択したジャンルにリスナーを登録する

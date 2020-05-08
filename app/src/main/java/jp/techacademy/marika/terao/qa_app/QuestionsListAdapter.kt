@@ -52,7 +52,7 @@ class QuestionsListAdapter(context: Context):BaseAdapter() {
         return convertView
     }
 
-    fun settQuestionArrayList(questionArrayList: ArrayList<Question>){
+    fun setQuestionArrayList(questionArrayList: ArrayList<Question>){
         mQuestionArrayList=questionArrayList
 }
 

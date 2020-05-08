@@ -325,7 +325,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 // 質問のリストをクリアしてから再度Adapterにセットし、AdapterをListViewにセットし直す
                 mQuestionArrayList.clear()
-                mAdapter.settQuestionArrayList(mQuestionArrayList)
+                mAdapter.setQuestionArrayList(mQuestionArrayList)
                 mListView.adapter = mAdapter
 
                 // 選択したジャンルにリスナーを登録する

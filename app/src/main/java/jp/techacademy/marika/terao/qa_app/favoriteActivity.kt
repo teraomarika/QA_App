@@ -102,17 +102,14 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         super.onCreate(savedInstanceState)
         val dataBaseReference = FirebaseDatabase.getInstance().reference
         setContentView(R.layout.activity_favorite)
+
+
+
         var mAuthListenr : FirebaseAuth.AuthStateListener? = null
         var user1 = FirebaseAuth.getInstance().currentUser
-        //mToolbar = findViewById(R.id.toolbar)
-        //setSupportActionBar(mToolbar)
 
-        //val fab = findViewById<FloatingActionButton>(R.id.fab)
 
-        // ナビゲーションドロワーの設定
 
-        // --- ここから ---
-        // Firebase
         var testRef = dataBaseReference.child("favorite").child(user1?.uid.toString())
         testRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -132,9 +129,6 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
                     Log.d("aaa",item.toString())
 
                 }
-                Log.d("aab",p0.childrenCount.toString())
-
-                Log.d("aab","とおるれ")
 
             }
         })
@@ -161,7 +155,6 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
 
         // 1:趣味を既定の選択とする
-        //navigationView.setNavigationItemSelectedListener(this)
         onNavigationItemSelected(navigationView.menu.getItem(2))
         mQuestionArrayList.clear()
         mAdapter.settQuestionArrayList(mQuestionArrayList)
@@ -222,12 +215,12 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         mListView.adapter = mAdapter
 
         // 選択したジャンルにリスナーを登録する
+
         if (mGenreRef != null) {
             mGenreRef!!.removeEventListener(mEventListener)
         }
         mGenreRef = mDatabaseReference.child(ContentsPATH).child(mGenre.toString())
         mGenreRef!!.addChildEventListener(mEventListener)
-
 
         return true
     }

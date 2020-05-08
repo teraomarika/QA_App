@@ -5,6 +5,4 @@
         android:state_pressed="true" />
     <item android:drawable="@drawable/btn" />
 
-        <item android:drawable="@drawable/favorite" />
-        <item android:drawable="@drawable/favorite_pressed"  android:state_selected="true" />
 </selector>

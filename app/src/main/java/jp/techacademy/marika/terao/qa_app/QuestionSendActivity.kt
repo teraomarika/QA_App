@@ -30,15 +30,10 @@ import kotlinx.android.synthetic.main.activity_question_send.*
 import java.io.ByteArrayOutputStream
 import kotlin.collections.HashMap
 
-class QuestionSendActivity : AppCompatActivity(), View.OnClickListener,
-    DatabaseReference.CompletionListener {
+class QuestionSendActivity : AppCompatActivity(), View.OnClickListener,DatabaseReference.CompletionListener {
     companion object {
-
         private val PERMISSIONS_REQUEST_CODE = 100
-        private val CHOOSER_REQUEST_CODE = 100
-
-
-    }
+        private val CHOOSER_REQUEST_CODE = 100 }
 
     private var mGenre: Int = 0
     private var mPictureUri: Uri? = null
@@ -84,6 +79,7 @@ class QuestionSendActivity : AppCompatActivity(), View.OnClickListener,
             } catch (e: Exception) {
                 return
             }
+
             // 取得したBimapの長辺を500ピクセルにリサイズする
             val imageWidth = image.width
             val imageHeight = image.height

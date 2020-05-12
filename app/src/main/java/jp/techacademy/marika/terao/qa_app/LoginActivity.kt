@@ -43,6 +43,7 @@ class LoginActivity : AppCompatActivity() {
                 val password = passwordText.text.toString()
                 login(email, password)
             } else {
+//                失敗した時エラー表示する
                 val view = findViewById<View>(android.R.id.content)
                 Snackbar.make(view, "アカウント作成に失敗しました", Snackbar.LENGTH_LONG).show()
 
@@ -129,7 +130,7 @@ class LoginActivity : AppCompatActivity() {
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(mLoginListener)
     }
     private fun saveName(name:String){
-//        Preferenceにほぞんする
+//        Preferenceに保存する
         val sp=PreferenceManager.getDefaultSharedPreferences(this)
         val editor=sp.edit()
         editor.putString(NameKEY,name)

@@ -246,6 +246,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {
+                        ccc=p0.value as Map<String, String>
 
                     }
                 })

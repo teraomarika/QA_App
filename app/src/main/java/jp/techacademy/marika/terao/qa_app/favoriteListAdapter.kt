@@ -57,7 +57,6 @@ class favoriteListAdapter(context: Context):BaseAdapter(){
     }
 
     fun setFavoriteArrayList(favoriteArrayList: ArrayList<favorite>) {
-        Log.d("FavoriteListAdapter", "List")
         mFavoriteArrayList = favoriteArrayList
     }
 }

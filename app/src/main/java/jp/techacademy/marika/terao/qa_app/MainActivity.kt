@@ -24,6 +24,7 @@ import com.google.firebase.database.*
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.list_question_detail.*
+import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -246,7 +247,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {
-                        ccc=p0.value as Map<String, String>
+                        try {ccc=p0.value as Map<String, String>
+
+                        }catch (e:Exception){
+                            Log.d("favorite","登録がない")
+                        }finally {
+                            Log.d("favorite","エラー回避")
+                        }
+
+
 
                     }
                 })

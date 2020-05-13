@@ -181,10 +181,9 @@ class favoriteActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 }
 
             }
+
+
         })
-
-
-
 
         Log.d("aaa", mQuestionArrayList.toString())
         mAdapter.notifyDataSetChanged()

@@ -15,10 +15,10 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
-class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener{
+class favoriteActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var mToolbar: Toolbar
-    private var mGenre=3
+    private var mGenre = 3
 
 
     private lateinit var mDatabaseReference: DatabaseReference
@@ -56,11 +56,14 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
                 }
             }
 
-            val question = Question(title, body, name, uid, dataSnapshot.key ?: "",
-                mGenre, bytes, answerArrayList)
+            val question = Question(
+                title, body, name, uid, dataSnapshot.key ?: "",
+                mGenre, bytes, answerArrayList
+            )
             mQuestionArrayList.add(question)
             mAdapter.notifyDataSetChanged()
         }
+
         override fun onChildChanged(dataSnapshot: DataSnapshot, s: String?) {
             val map = dataSnapshot.value as Map<String, String>
 
@@ -98,22 +101,69 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
 
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val dataBaseReference = FirebaseDatabase.getInstance().reference
         setContentView(R.layout.activity_favorite)
 
 
+//
+//        var mAuthListenr : FirebaseAuth.AuthStateListener? = null
+//        var user1 = FirebaseAuth.getInstance().currentUser
+//
+//
+//
+//        var testRef = dataBaseReference.child("favorite").child(user1?.uid.toString())
+//        testRef.addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onCancelled(p0: DatabaseError) {
+//                Log.d("aab","キャンセルとおる")
+//            }
+//
+//            override fun onDataChange(p0: DataSnapshot) {
+//                //登録していなかったらログインページへ
+//                if (user1 == null) {
+//                    // ログインしていなければログイン画面に遷移させる
+//                    val intent = Intent(applicationContext, LoginActivity::class.java)
+//                    startActivity(intent)
+//                }
+//
+//                Log.d("aab","とおるば")
+//                for (item in p0.children) {
+//                    Log.d("aaa",item.toString())
+//
+//                }
+//
+//            }
+//        })
+//
+//
+//
+//
+//        Log.d("aaa",mQuestionArrayList.toString())
+//        mAdapter.notifyDataSetChanged()
+//        // --- ここまで追加する ---
+//        mListView.setOnItemClickListener { parent, view, position, id ->
+//            // Questionのインスタンスを渡して質問詳細画面を起動する
+//            val intent = Intent(applicationContext, QuestionDetailActivity::class.java)
+//            intent.putExtra("question", mQuestionArrayList[position])
+//            startActivity(intent)
+//        }
+    }
 
-        var mAuthListenr : FirebaseAuth.AuthStateListener? = null
+    override fun onResume() {
+        super.onResume()
+
+        val dataBaseReference = FirebaseDatabase.getInstance().reference
+        setContentView(R.layout.activity_favorite)
+
+        var mAuthListenr: FirebaseAuth.AuthStateListener? = null
         var user1 = FirebaseAuth.getInstance().currentUser
-
 
 
         var testRef = dataBaseReference.child("favorite").child(user1?.uid.toString())
         testRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
-                Log.d("aab","キャンセルとおる")
+                Log.d("aab", "キャンセルとおる")
             }
 
             override fun onDataChange(p0: DataSnapshot) {
@@ -124,24 +174,19 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
                     startActivity(intent)
                 }
 
-                Log.d("aab","とおるば")
+                Log.d("aab", "とおるば")
                 for (item in p0.children) {
-                    Log.d("aaa",item.toString())
+                    Log.d("aaa", item.toString())
 
                 }
 
             }
         })
 
-//        mDatabaseReference = FirebaseDatabase.getInstance().reference
-//        // ListViewの準備
-//        mListView = findViewById(R.id.listView2)
-//        mAdapter = QuestionsListAdapter(this)
-//        mQuestionArrayList = ArrayList<Question>()
 
 
 
-        Log.d("aaa",mQuestionArrayList.toString())
+        Log.d("aaa", mQuestionArrayList.toString())
         mAdapter.notifyDataSetChanged()
         // --- ここまで追加する ---
         mListView.setOnItemClickListener { parent, view, position, id ->
@@ -150,12 +195,9 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
             intent.putExtra("question", mQuestionArrayList[position])
             startActivity(intent)
         }
-    }
-    override fun onResume() {
-        super.onResume()
 
 
-        Log.d("aaa","bbbb")
+        Log.d("aaa", "bbbb")
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
 
         // 1:趣味を既定の選択とする
@@ -169,6 +211,8 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         mListView = findViewById(R.id.listView2)
         mAdapter = QuestionsListAdapter(this)
         mQuestionArrayList = ArrayList<Question>()
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -188,6 +232,7 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
 
         return super.onOptionsItemSelected(item)
     }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val id = 2
         val user = FirebaseAuth.getInstance().currentUser

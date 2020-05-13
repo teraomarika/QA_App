@@ -133,11 +133,11 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
             }
         })
 
-        mDatabaseReference = FirebaseDatabase.getInstance().reference
-        // ListViewの準備
-        mListView = findViewById(R.id.listView2)
-        mAdapter = QuestionsListAdapter(this)
-        mQuestionArrayList = ArrayList<Question>()
+//        mDatabaseReference = FirebaseDatabase.getInstance().reference
+//        // ListViewの準備
+//        mListView = findViewById(R.id.listView2)
+//        mAdapter = QuestionsListAdapter(this)
+//        mQuestionArrayList = ArrayList<Question>()
 
 
 
@@ -153,6 +153,8 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
     }
     override fun onResume() {
         super.onResume()
+
+
         Log.d("aaa","bbbb")
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
 
@@ -161,6 +163,12 @@ class favoriteActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         mQuestionArrayList.clear()
         mAdapter.setQuestionArrayList(mQuestionArrayList)
         mListView.adapter = mAdapter
+
+        mDatabaseReference = FirebaseDatabase.getInstance().reference
+        // ListViewの準備
+        mListView = findViewById(R.id.listView2)
+        mAdapter = QuestionsListAdapter(this)
+        mQuestionArrayList = ArrayList<Question>()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

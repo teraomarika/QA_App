@@ -179,7 +179,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             // ログイン済みのユーザーを取得する
             val user = FirebaseAuth.getInstance().currentUser
 
-            if (user == null||mGenre !=99) {
+            if (user == null) {
                 // ログインしていなければログイン画面に遷移させる
                 val intent = Intent(applicationContext, LoginActivity::class.java)
                 startActivity(intent)
@@ -248,8 +248,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                     override fun onDataChange(p0: DataSnapshot) {
                         try {ccc=p0.value as Map<String, String>
-
-                        }catch (e:Exception){
+                        }catch (e:TypeCastException){
                             Log.d("favorite","登録がない")
                         }finally {
                             Log.d("favorite","エラー回避")

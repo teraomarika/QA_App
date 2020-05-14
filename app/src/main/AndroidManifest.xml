@@ -30,8 +30,7 @@ package="jp.techacademy.marika.terao.qa_app">
     <activity android:name=".QuestionSendActivity" />
     <activity android:name=".QuestionDetailActivity" />
     <activity android:name=".AnswerSendActivity" />
-    <activity android:name=".favoriteDetailActivity" />
-    <activity android:name=".favoriteActivity" />
+    <activity android:name=".FavoriteActivity" />
 
 </application>
 

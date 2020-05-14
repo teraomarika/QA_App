@@ -15,7 +15,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
-class favoriteActivity : AppCompatActivity() {
+class FavoriteActivity : AppCompatActivity() {
 
     private lateinit var mToolbar: Toolbar
     private var mGenre = 3

@@ -9,7 +9,6 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.ListView
 import android.widget.Toast
 
 
@@ -22,8 +21,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_question_detail.*
-import kotlinx.android.synthetic.main.list_question_detail.*
-import kotlinx.android.synthetic.main.list_questions.*
 import java.util.HashMap
 
 class QuestionDetailActivity : AppCompatActivity() {
@@ -32,7 +29,7 @@ class QuestionDetailActivity : AppCompatActivity() {
     private lateinit var mAdapter: QuestionDetailListAdapter
     private lateinit var mAnswerRef: DatabaseReference
     val user:FirebaseUser? = null
-    private lateinit var mFavorite: favorite
+    private lateinit var mFavorite: Favorite
     private lateinit var toastButton: Button
     var mAuthListenr : FirebaseAuth.AuthStateListener? = null
     var user1 = FirebaseAuth.getInstance().currentUser

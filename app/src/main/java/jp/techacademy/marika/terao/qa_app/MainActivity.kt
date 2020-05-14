@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var mNavigationView: NavigationView
     private lateinit var fab: FloatingActionButton
     private lateinit var mAdapter: QuestionsListAdapter
-    private lateinit var mAdapter2:favoriteListAdapter
+//    private lateinit var mAdapter2:favoriteListAdapter
 
 
 

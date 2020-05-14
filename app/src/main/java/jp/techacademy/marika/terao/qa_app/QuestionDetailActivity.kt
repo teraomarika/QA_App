@@ -133,7 +133,6 @@ class QuestionDetailActivity : AppCompatActivity() {
                     toastButton.text = "お気に入り登録をする"
                 }
                 if (p0.childrenCount > 0) {
-                    Log.d("ffff", "ffff")
                     Log.d("ffff", mQuestion.questionUid.toString())
 
                     for (item in p0.children) {
@@ -165,7 +164,7 @@ class QuestionDetailActivity : AppCompatActivity() {
                     val intent = Intent(applicationContext, LoginActivity::class.java)
                     startActivity(intent)
                 } else {
-                    Log.d("aaaaa", "fffff")
+                    Log.d("aaaaa", "押した")
                     if (checkFlag == false) {
                         checkFlag = true
                         // お気に入りに登録

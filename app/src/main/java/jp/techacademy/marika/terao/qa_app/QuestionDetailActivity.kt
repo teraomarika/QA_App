@@ -29,7 +29,7 @@ class QuestionDetailActivity : AppCompatActivity() {
     private lateinit var mAdapter: QuestionDetailListAdapter
     private lateinit var mAnswerRef: DatabaseReference
     val user:FirebaseUser? = null
-    private lateinit var mFavorite: Favorite
+//    private lateinit var mFavorite: Favorite
     private lateinit var toastButton: Button
     var mAuthListenr : FirebaseAuth.AuthStateListener? = null
     var user1 = FirebaseAuth.getInstance().currentUser

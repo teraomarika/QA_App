@@ -28,10 +28,11 @@ class QuestionDetailActivity : AppCompatActivity() {
     private lateinit var mQuestion: Question
     private lateinit var mAdapter: QuestionDetailListAdapter
     private lateinit var mAnswerRef: DatabaseReference
-    val user:FirebaseUser? = null
-//    private lateinit var mFavorite: Favorite
+    val user: FirebaseUser? = null
+
+    //    private lateinit var mFavorite: Favorite
     private lateinit var toastButton: Button
-    var mAuthListenr : FirebaseAuth.AuthStateListener? = null
+    var mAuthListenr: FirebaseAuth.AuthStateListener? = null
     var user1 = FirebaseAuth.getInstance().currentUser
     val favorite_data = HashMap<String, String>()
     var checkFlag: Boolean = false
@@ -56,16 +57,16 @@ class QuestionDetailActivity : AppCompatActivity() {
 
             val answer = Answer(body, name, uid, answerUid)
             mQuestion.answers.add(answer)
-            listView.adapter=mAdapter
+            listView.adapter = mAdapter
             mAdapter.notifyDataSetChanged()
         }
 
         override fun onChildChanged(dataSnapshot: DataSnapshot, s: String?) {
-            val map=dataSnapshot.value as Map<String, String>
-            val answerUid=dataSnapshot.key?:""
+            val map = dataSnapshot.value as Map<String, String>
+            val answerUid = dataSnapshot.key ?: ""
 
-            for (answer in mQuestion.answers){
-                if (answerUid == answerUid){
+            for (answer in mQuestion.answers) {
+                if (answerUid == answerUid) {
                     return
                 }
             }
@@ -97,9 +98,14 @@ class QuestionDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question_detail)
+    }
 
-        if (user1 !=null){
-            var toastButton:Button=findViewById(R.id.show_toast_button)
+    override fun onResume() {
+        super.onResume()
+
+
+        if (user1 != null) {
+            var toastButton: Button = findViewById(R.id.show_toast_button)
             toastButton.setVisibility(View.VISIBLE)
         }
 
@@ -116,24 +122,24 @@ class QuestionDetailActivity : AppCompatActivity() {
 
         testRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
-                Log.d("aab","キャンセルとおる")
+                Log.d("aab", "キャンセルとおる")
             }
 
             override fun onDataChange(p0: DataSnapshot) {
                 //登録していなかったらログインページへ
 
-                if(user != null) {
+                if (user != null) {
                     toastButton.setBackgroundColor(Color.rgb(192, 192, 192))
                     toastButton.text = "お気に入り登録をする"
                 }
                 if (p0.childrenCount > 0) {
-                    Log.d("ffff","ffff")
-                    Log.d("ffff",mQuestion.questionUid.toString())
+                    Log.d("ffff", "ffff")
+                    Log.d("ffff", mQuestion.questionUid.toString())
 
                     for (item in p0.children) {
-                        Log.d("fffaab",item.toString())
+                        Log.d("fffaab", item.toString())
                         if (item.key.toString() == mQuestion.questionUid.toString()) {
-                            Log.d("fffaaa",item.toString())
+                            Log.d("fffaaa", item.toString())
                             checkFlag = true
                             var toastButton: Button = findViewById(R.id.show_toast_button)
                             toastButton.setVisibility(View.VISIBLE)
@@ -143,11 +149,11 @@ class QuestionDetailActivity : AppCompatActivity() {
                     }
                 }
 
-                Log.d("aab","とおる2")
+                Log.d("aab", "とおる2")
 
             }
         })
-        if(user1 != null) {
+        if (user1 != null) {
             var toastButton: Button = findViewById(R.id.show_toast_button)
             toastButton.setVisibility(View.VISIBLE)
             toastButton.setBackgroundColor(Color.rgb(192, 192, 192))
@@ -199,7 +205,6 @@ class QuestionDetailActivity : AppCompatActivity() {
         title = mQuestion.title
 
 
-
         // ListViewの準備
         mAdapter = QuestionDetailListAdapter(this, mQuestion)
         listView.adapter = mAdapter
@@ -222,14 +227,16 @@ class QuestionDetailActivity : AppCompatActivity() {
         }
 
 
-        mAnswerRef = dataBaseReference.child(ContentsPATH).child(mQuestion.genre.toString()).child(mQuestion.questionUid).child(AnswersPATH)
+        mAnswerRef = dataBaseReference.child(ContentsPATH).child(mQuestion.genre.toString())
+            .child(mQuestion.questionUid).child(AnswersPATH)
         mAnswerRef.addChildEventListener(mEventListener)
     }
 
+
     override fun onStart() {
         super.onStart()
-        if(user1 != null) {
-            Log.d("aaa","qqq")
+        if (user1 != null) {
+            Log.d("aaa", "qqq")
             var toastButton: Button = findViewById(R.id.show_toast_button)
             toastButton.setVisibility(View.VISIBLE)
         }
@@ -241,7 +248,8 @@ class QuestionDetailActivity : AppCompatActivity() {
         val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
         cursor.moveToFirst()
         return cursor.getString(column_index)
-    }}
+    }
+}
 
 
 

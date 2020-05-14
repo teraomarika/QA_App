@@ -172,6 +172,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mToolbar = findViewById(R.id.toolbar)
         setSupportActionBar(mToolbar)
 
+
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener { view ->
             // ジャンルを選択していない場合（mGenre == 0）はエラーを表示するだけ
@@ -208,6 +209,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
 
+//
+//        // Firebase
+//        mDatabaseReference = FirebaseDatabase.getInstance().reference
+//
+//        // ListViewの準備
+//        mListView = findViewById(R.id.listView)
+//        mAdapter = QuestionsListAdapter(this)
+//        mQuestionArrayList = ArrayList<Question>()
+//        mAdapter.notifyDataSetChanged()
+//        mListView.setOnItemClickListener { parent, view, position, id ->
+//            // Questionのインスタンスを渡して質問詳細画面を起動する
+//            val intent = Intent(applicationContext, QuestionDetailActivity::class.java)
+//            intent.putExtra("question", mQuestionArrayList[position])
+//            startActivity(intent)
+//        }
+    }
+
+    override fun onResume() {
+
+
+        super.onResume()
+
 
         // Firebase
         mDatabaseReference = FirebaseDatabase.getInstance().reference
@@ -223,10 +246,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             intent.putExtra("question", mQuestionArrayList[position])
             startActivity(intent)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
 
         mNavigationView=findViewById(R.id.nav_view)
         mNavigationView.setNavigationItemSelectedListener(this)

@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 
+
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.list_question_detail.*
 import java.lang.Exception
@@ -34,6 +35,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     // --- ここから ---
     private lateinit var mDatabaseReference: DatabaseReference
+    private lateinit var dataBaseReference: DatabaseReference
+    private lateinit var favoriteList: DatabaseReference
     private lateinit var mListView: ListView
     private lateinit var mListView2:ListView
     private lateinit var mQuestionArrayList: ArrayList<Question>
@@ -41,6 +44,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var fab: FloatingActionButton
     private lateinit var mAdapter: QuestionsListAdapter
     private lateinit var mAdapter2:favoriteListAdapter
+
 
 
     var user1=FirebaseAuth.getInstance().currentUser
@@ -201,7 +205,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
 
-        // --- ここから ---
+
+
+
+
         // Firebase
         mDatabaseReference = FirebaseDatabase.getInstance().reference
 
@@ -210,7 +217,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mAdapter = QuestionsListAdapter(this)
         mQuestionArrayList = ArrayList<Question>()
         mAdapter.notifyDataSetChanged()
-        // --- ここまで追加する ---
         mListView.setOnItemClickListener { parent, view, position, id ->
             // Questionのインスタンスを渡して質問詳細画面を起動する
             val intent = Intent(applicationContext, QuestionDetailActivity::class.java)
@@ -221,7 +227,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onResume() {
         super.onResume()
-        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+
         mNavigationView=findViewById(R.id.nav_view)
         mNavigationView.setNavigationItemSelectedListener(this)
 
@@ -229,12 +235,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (user1 !=null){
             val menuNav=mNavigationView.menu
             val tmp =menuNav.findItem(R.id.nav_favorite)
-            tmp.isVisible= true
+            tmp.isVisible=true
         }else{
             val menuNav=mNavigationView.menu
             val tmp=menuNav.findItem(R.id.nav_favorite)
             tmp.isVisible=false
         }
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
         // 1:趣味を既定の選択とする
         if (mGenre == 0) {
             onNavigationItemSelected(navigationView.menu.getItem(0))
@@ -305,10 +312,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }else{
                 mToolbar.title="お気に入り"
                 mGenre=99
+//                val intent =Intent(applicationContext,favoriteActivity::class.java)
+//                startActivity(intent)
+//                return  true
+//                dataBaseReference =FirebaseDatabase.getInstance().getReference()
+//                favoriteList = dataBaseReference.child(Const.FavPATH).child(user.getUid())
+
             }
         }
-
-
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         drawer.closeDrawer(GravityCompat.START)
 

@@ -15,7 +15,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
-class favoriteActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class favoriteActivity : AppCompatActivity() {
 
     private lateinit var mToolbar: Toolbar
     private var mGenre = 3
@@ -83,7 +83,6 @@ class favoriteActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                             question.answers.add(answer)
                         }
                     }
-
                     mAdapter.notifyDataSetChanged()
                 }
             }
@@ -105,6 +104,7 @@ class favoriteActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favorite)
+        
 
 
 //
@@ -179,13 +179,11 @@ class favoriteActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                     Log.d("aaa", item.toString())
 
                 }
-
             }
-
-
         })
-
-        Log.d("aaa", mQuestionArrayList.toString())
+        mListView = findViewById(R.id.listView2)
+        mAdapter = QuestionsListAdapter(this)
+        mQuestionArrayList = ArrayList<Question>()
         mAdapter.notifyDataSetChanged()
         // --- ここまで追加する ---
         mListView.setOnItemClickListener { parent, view, position, id ->
@@ -199,18 +197,18 @@ class favoriteActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         Log.d("aaa", "bbbb")
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
 
-        // 1:趣味を既定の選択とする
-        onNavigationItemSelected(navigationView.menu.getItem(2))
-        mQuestionArrayList.clear()
-        mAdapter.setQuestionArrayList(mQuestionArrayList)
-        mListView.adapter = mAdapter
-
-        mDatabaseReference = FirebaseDatabase.getInstance().reference
-        // ListViewの準備
-        mListView = findViewById(R.id.listView2)
-        mAdapter = QuestionsListAdapter(this)
-        mQuestionArrayList = ArrayList<Question>()
-
+//        // 1:趣味を既定の選択とする
+//        onNavigationItemSelected(navigationView.menu.getItem(2))
+//        mQuestionArrayList.clear()
+//        mAdapter.setQuestionArrayList(mQuestionArrayList)
+//        mListView.adapter = mAdapter
+//
+//        mDatabaseReference = FirebaseDatabase.getInstance().reference
+//        // ListViewの準備
+//        mListView = findViewById(R.id.listView2)
+//        mAdapter = QuestionsListAdapter(this)
+//        mQuestionArrayList = ArrayList<Question>()
+//
 
     }
 
@@ -231,53 +229,54 @@ class favoriteActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         return super.onOptionsItemSelected(item)
     }
+}
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        val id = 2
-        val user = FirebaseAuth.getInstance().currentUser
-        if (id == R.id.nav_hobby) {
-            mToolbar.title = "趣味"
-            mGenre = 1
-        } else if (id == R.id.nav_life) {
-            mToolbar.title = "生活"
-            mGenre = 2
-        } else if (id == R.id.nav_health) {
-            mToolbar.title = "健康"
-            mGenre = 3
-        } else if (id == R.id.nav_compter) {
-            mToolbar.title = "コンピューター"
-            mGenre = 4
-        } else if (id == R.id.nav_favorite) {
-            if (user == null) {
-                mToolbar.title = "会員登録"
-                val intent = Intent(applicationContext, LoginActivity::class.java)
-                startActivity(intent)
-            } else {
-                mToolbar.title = "お気に入り"
-                val intent = Intent(applicationContext, favoriteActivity::class.java)
-                startActivity(intent)
-            }
-        }
+//    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+////        val id = 2
+////        val user = FirebaseAuth.getInstance().currentUser
+////        if (id == R.id.nav_hobby) {
+////            mToolbar.title = "趣味"
+////            mGenre = 1
+////        } else if (id == R.id.nav_life) {
+////            mToolbar.title = "生活"
+////            mGenre = 2
+////        } else if (id == R.id.nav_health) {
+////            mToolbar.title = "健康"
+////            mGenre = 3
+////        } else if (id == R.id.nav_compter) {
+////            mToolbar.title = "コンピューター"
+////            mGenre = 4
+////        } else if (id == R.id.nav_favorite) {
+////            if (user == null) {
+////                mToolbar.title = "会員登録"
+////                val intent = Intent(applicationContext, LoginActivity::class.java)
+////                startActivity(intent)
+////            } else {
+////                mToolbar.title = "お気に入り"
+////                val intent = Intent(applicationContext, favoriteActivity::class.java)
+////                startActivity(intent)
+////            }
+////        }
 
-        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
-        drawer.closeDrawer(GravityCompat.START)
+//        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+//        drawer.closeDrawer(GravityCompat.START)
 
         // --- ここから ---
-        // 質問のリストをクリアしてから再度Adapterにセットし、AdapterをListViewにセットし直す
-        mQuestionArrayList.clear()
-        mAdapter.setQuestionArrayList(mQuestionArrayList)
-        mListView.adapter = mAdapter
+//        // 質問のリストをクリアしてから再度Adapterにセットし、AdapterをListViewにセットし直す
+//        mQuestionArrayList.clear()
+//        mAdapter.setQuestionArrayList(mQuestionArrayList)
+//        mListView.adapter = mAdapter
 
         // 選択したジャンルにリスナーを登録する
-
-        if (mGenreRef != null) {
-            mGenreRef!!.removeEventListener(mEventListener)
-        }
-        mGenreRef = mDatabaseReference.child(ContentsPATH).child(mGenre.toString())
-        mGenreRef!!.addChildEventListener(mEventListener)
-
-        return true
-    }
-}
+//
+//        if (mGenreRef != null) {
+//            mGenreRef!!.removeEventListener(mEventListener)
+//        }
+//        mGenreRef = mDatabaseReference.child(ContentsPATH).child(mGenre.toString())
+//        mGenreRef!!.addChildEventListener(mEventListener)
+//
+//        return true
+//    }
+//}
 
 

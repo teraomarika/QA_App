@@ -126,7 +126,7 @@ class QuestionDetailActivity : AppCompatActivity() {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                //登録していなかったらログインページへ
+                //登録していなかったらログインページへf
 
                 if (user != null) {
                     toastButton.setBackgroundColor(Color.rgb(192, 192, 192))
@@ -136,7 +136,7 @@ class QuestionDetailActivity : AppCompatActivity() {
                     Log.d("ffff", mQuestion.questionUid.toString())
 
                     for (item in p0.children) {
-                        Log.d("fffaab", item.toString())
+                        Log.d("お気に入り持ってるのはこれ", item.toString())
                         if (item.key.toString() == mQuestion.questionUid.toString()) {
                             Log.d("fffaaa", item.toString())
                             checkFlag = true

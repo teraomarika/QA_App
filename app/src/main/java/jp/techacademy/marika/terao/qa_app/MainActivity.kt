@@ -198,7 +198,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             // ログイン済みのユーザーを取得する
 
 
-            if (user1 == null) {
+            if (user1 == null|| mGenre != 99) {
                 // ログインしていなければログイン画面に遷移させる
                 val intent = Intent(applicationContext, LoginActivity::class.java)
                 startActivity(intent)
